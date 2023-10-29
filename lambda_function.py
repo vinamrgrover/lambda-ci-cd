@@ -1,7 +1,8 @@
 import requests
 
-def lambda_handler(event = None, context = None) -> str:
-    url = 'https://random-word-api.herokuapp.com/word?length=5'
+def lambda_handler(event, context) -> str:
+    word_count = event['wordCount']
+    url = f'https://random-word-api.herokuapp.com/word?number={int(word_count)}'
     response = requests.get(url)
-    return ''.join(response.json()).upper()
+    return ', '.join(response.json()).upper()
 
